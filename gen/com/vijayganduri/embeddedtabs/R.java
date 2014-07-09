@@ -911,7 +911,9 @@ containing a value of this type.
         public static final int abs__textfield_searchview_right_holo_dark=0x7f02006d;
         public static final int abs__textfield_searchview_right_holo_light=0x7f02006e;
         public static final int abs__toast_frame=0x7f02006f;
-        public static final int ic_launcher=0x7f020070;
+        public static final int collections_sort_by_size=0x7f020070;
+        public static final int device_access_mic=0x7f020071;
+        public static final int ic_launcher=0x7f020072;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f040020;
@@ -1046,21 +1048,11 @@ containing a value of this type.
         public static final int hello_world=0x7f09000e;
     }
     public static final class style {
-        /** 
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    
-
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        
-         */
         public static final int AppBaseTheme=0x7f0a0059;
         /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f0a005a;
+        public static final int MyActionBarStyle=0x7f0a005b;
         public static final int Sherlock___TextAppearance_Small=0x7f0a0046;
         public static final int Sherlock___Theme=0x7f0a0051;
         public static final int Sherlock___Theme_DarkActionBar=0x7f0a0053;

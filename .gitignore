@@ -1,0 +1,26 @@
+*.iml
+
+*.ipr
+
+*.iws
+
+*.swp
+*~	#ignore all files that end with tilde 
+backups
+
+.DS_Store
+
+*.class	# ignore class files
+target
+.settings
+.factorypath
+.apt_generated
+bin
+gen
+build.sh
+.settings
+
+.classpath
+
+.project
+config
