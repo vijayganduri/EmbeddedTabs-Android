@@ -1,20 +1,23 @@
 package com.vijayganduri.dietplancontrol;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
+import com.actionbarsherlock.app.ActionBar.TabListener;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.vijayganduri.embeddedtabs.R;
 
-public class MainActivity extends SherlockFragmentActivity{
+public class MainActivity extends SherlockFragmentActivity implements TabListener, OnPageChangeListener{
+
+	DemoCollectionPagerAdapter mDemoCollectionPagerAdapter;
+	ViewPager mViewPager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,106 +26,83 @@ public class MainActivity extends SherlockFragmentActivity{
 
 		ActionBar actionBar = getSupportActionBar();
 
-		setHasEmbeddedTabs(actionBar, true);
+		ActionBarUtils.setHasEmbeddedTabs(actionBar, true);
 
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-		createNewTab(actionBar, R.drawable.device_access_mic, FirstFragment.class);
-		createNewTab(actionBar, R.drawable.collections_sort_by_size, SecondFragment.class);
+		mDemoCollectionPagerAdapter =
+				new DemoCollectionPagerAdapter(
+						getSupportFragmentManager());
+		mViewPager = (ViewPager) findViewById(R.id.pager);
+		mViewPager.setAdapter(mDemoCollectionPagerAdapter);
+		mViewPager.setOnPageChangeListener(this);
+		
+		createNewTab(actionBar, R.drawable.device_access_mic);
+		createNewTab(actionBar, R.drawable.collections_sort_by_size);
 
 	}
 
-	private <E extends Fragment> void createNewTab(ActionBar actionBar, int iconResId, Class<E> clz){
+	private void createNewTab(ActionBar actionBar, int iconResId){
 		Tab tab = actionBar.newTab();
 		tab.setIcon(iconResId);
-		TabListener<E> t = new TabListener<E>(this, clz);
-		tab.setTabListener(t);
-
+		tab.setTabListener(this);
 		actionBar.addTab(tab);
 	}
 
-	private class TabListener<T extends Fragment> implements
-	ActionBar.TabListener {
-		private Fragment mFragment;
-		private final Activity mActivity;
-		private final Class<T> mClass;
 
-		/**
-		 * Constructor used each time a new tab is created.
-		 * 
-		 * @param activity
-		 *            The host Activity, used to instantiate the fragment
-		 * @param tag
-		 *            The identifier tag for the fragment
-		 * @param clz
-		 *            The fragment's Class, used to instantiate the fragment
-		 */
-		public TabListener(Activity activity, Class<T> clz) {
-			mActivity = activity;
-			mClass = clz;
+	public class DemoCollectionPagerAdapter extends FragmentStatePagerAdapter {
+		public DemoCollectionPagerAdapter(FragmentManager fm) {
+			super(fm);
 		}
 
-		public void onTabSelected(Tab tab, FragmentTransaction ft) {
-			// Check if the fragment is already initialized
-			if (mFragment == null) {
-				// If not, instantiate and add it to the activity
-				mFragment = Fragment.instantiate(mActivity, mClass.getName());
-				ft.add(android.R.id.content, mFragment);
-			} else {
-				// If it exists, simply attach it in order to show it
-				ft.attach(mFragment);
-			}
+		@Override
+		public Fragment getItem(int i) {	       
+			return i==0?new FirstFragment():new SecondFragment();
 		}
 
-		public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-			if (mFragment != null) {
-				// Detach the fragment, because another one is being attached
-				ft.detach(mFragment);
-			}
+		@Override
+		public int getCount() {
+			return 2;
 		}
 
-		public void onTabReselected(Tab tab, FragmentTransaction ft) {
-			// User selected the already selected tab. Usually do nothing.
+		@Override
+		public CharSequence getPageTitle(int position) {
+			return "PAGE " + (position + 1);
 		}
 	}
 
-	public static void setHasEmbeddedTabs(Object inActionBar, final boolean inHasEmbeddedTabs)
-	{
-		// get the ActionBar class
-		Class<?> actionBarClass = inActionBar.getClass();
-
-		//This never works, as we are using actionbarsherlock
-		// if it is a Jelly Bean implementation (ActionBarImplJB), get the super class (ActionBarImplICS)
-		if ("android.support.v7.app.ActionBarImplJB".equals(actionBarClass.getName()))
-		{
-			actionBarClass = actionBarClass.getSuperclass();
-		}
-
-		try
-		{
-			// try to get the mActionBar field, because the current ActionBar is probably just a wrapper Class
-			// if this fails, no worries, this will be an instance of the native ActionBar class or from the ActionBarImplBase class
-			final Field actionBarField = actionBarClass.getDeclaredField("mActionBar");
-			actionBarField.setAccessible(true);
-			inActionBar = actionBarField.get(inActionBar);
-			actionBarClass = inActionBar.getClass();
-		}
-		catch (IllegalAccessException e) {}
-		catch (IllegalArgumentException e) {}
-		catch (NoSuchFieldException e) {}
-
-		try
-		{
-			// now call the method setHasEmbeddedTabs, this will put the tabs inside the ActionBar
-			final Method method = actionBarClass.getDeclaredMethod("setHasEmbeddedTabs", new Class[] { Boolean.TYPE });
-			method.setAccessible(true);
-			method.invoke(inActionBar, new Object[]{ inHasEmbeddedTabs });
-		}
-		catch (NoSuchMethodException e)	{}
-		catch (InvocationTargetException e) {}
-		catch (IllegalAccessException e) {}
-		catch (IllegalArgumentException e) {}
+	@Override
+	public void onTabSelected(Tab tab, FragmentTransaction ft) {
+		mViewPager.setCurrentItem(tab.getPosition(), true);
 	}
 
+	@Override
+	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void onTabReselected(Tab tab, FragmentTransaction ft) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onPageScrollStateChanged(int arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onPageScrolled(int arg0, float arg1, int arg2) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onPageSelected(int position) {
+		getSupportActionBar().setSelectedNavigationItem(position);
+	}
+	
 }
