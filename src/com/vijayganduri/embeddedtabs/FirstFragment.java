@@ -1,4 +1,4 @@
-package com.vijayganduri.dietplancontrol;
+package com.vijayganduri.embeddedtabs;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,13 +7,13 @@ import android.view.ViewGroup;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.vijayganduri.embeddedtabs.R;
 
-public class SecondFragment extends SherlockFragment
+public class FirstFragment extends SherlockFragment
 {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_second, null);
+		return inflater.inflate(R.layout.fragment_first, null);
 	}
 	
 	@Override

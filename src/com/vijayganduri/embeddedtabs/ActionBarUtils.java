@@ -1,4 +1,4 @@
-package com.vijayganduri.dietplancontrol;
+package com.vijayganduri.embeddedtabs;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
