@@ -7,13 +7,13 @@ import android.view.ViewGroup;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.vijayganduri.embeddedtabs.R;
 
-public class SampleFragment extends SherlockFragment
+public class SecondFragment extends SherlockFragment
 {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_main, null);
+		return inflater.inflate(R.layout.fragment_second, null);
 	}
 	
 	@Override

@@ -996,9 +996,10 @@ containing a value of this type.
         public static final int abs__search_view=0x7f030013;
         public static final int abs__simple_dropdown_hint=0x7f030014;
         public static final int activity_main=0x7f030015;
-        public static final int fragment_main=0x7f030016;
-        public static final int sherlock_spinner_dropdown_item=0x7f030017;
-        public static final int sherlock_spinner_item=0x7f030018;
+        public static final int fragment_first=0x7f030016;
+        public static final int fragment_second=0x7f030017;
+        public static final int sherlock_spinner_dropdown_item=0x7f030018;
+        public static final int sherlock_spinner_item=0x7f030019;
     }
     public static final class menu {
         public static final int main=0x7f0b0000;
@@ -1043,9 +1044,9 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abs__shareactionprovider_share_with_application=0x7f090007;
-        public static final int action_settings=0x7f09000f;
         public static final int app_name=0x7f09000d;
-        public static final int hello_world=0x7f09000e;
+        public static final int one=0x7f09000e;
+        public static final int two=0x7f09000f;
     }
     public static final class style {
         public static final int AppBaseTheme=0x7f0a0059;
@@ -1053,6 +1054,7 @@ containing a value of this type.
          */
         public static final int AppTheme=0x7f0a005a;
         public static final int MyActionBarStyle=0x7f0a005b;
+        public static final int MyTabBarStyle=0x7f0a005c;
         public static final int Sherlock___TextAppearance_Small=0x7f0a0046;
         public static final int Sherlock___Theme=0x7f0a0051;
         public static final int Sherlock___Theme_DarkActionBar=0x7f0a0053;

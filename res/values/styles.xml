@@ -1,14 +1,19 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="AppBaseTheme" parent="@style/Theme.Sherlock.Light"></style>
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
-        <item name="android:actionBarStyle">@style/MyActionBarStyle</item>
+        <item name="android:actionBarStyle">@style/MyActionBarStyle</item>        
+    	<item name="android:actionBarTabBarStyle">@style/MyTabBarStyle</item>
     </style>
 
     <style name="MyActionBarStyle" parent="@style/Widget.Sherlock.Light.ActionBar.Solid">
         <item name="android:displayOptions"></item>
+    </style>
+
+    <style name="MyTabBarStyle" parent="@style/Widget.Sherlock.Light.ActionBar.TabBar">
+        <item name="android:showDividers">none</item>
     </style>
 
 </resources>
