@@ -5,19 +5,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.ActionBar.TabListener;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.vijayganduri.embeddedtabs.R;
+import com.matthieu.ViewPagerParallax;
 
 public class MainActivity extends SherlockFragmentActivity implements TabListener, OnPageChangeListener{
 
 	DemoCollectionPagerAdapter mDemoCollectionPagerAdapter;
-	ViewPager mViewPager;
+	ViewPagerParallax mViewPager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,17 +28,18 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		ActionBarUtils.setHasEmbeddedTabs(actionBar, true);
 
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-		mDemoCollectionPagerAdapter =
-				new DemoCollectionPagerAdapter(
-						getSupportFragmentManager());
-		mViewPager = (ViewPager) findViewById(R.id.pager);
-		mViewPager.setAdapter(mDemoCollectionPagerAdapter);
-		mViewPager.setOnPageChangeListener(this);
 		
 		createNewTab(actionBar, R.drawable.device_access_mic);
 		createNewTab(actionBar, R.drawable.collections_sort_by_size);
 
+		mDemoCollectionPagerAdapter = new DemoCollectionPagerAdapter(getSupportFragmentManager());
+		mViewPager = (ViewPagerParallax) findViewById(R.id.pager);
+		//mViewPager.setOverlapPercentage(0.25f);
+		//mViewPager.addOnPageChangeListener(this);
+		mViewPager.set_max_pages(2);
+		mViewPager.setBackgroundAsset(R.drawable.green_blue_blur);
+		mViewPager.setAdapter(mDemoCollectionPagerAdapter);
+		mViewPager.setCurrentItem(0);
 	}
 
 	private void createNewTab(ActionBar actionBar, int iconResId){
@@ -73,7 +73,9 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		mViewPager.setCurrentItem(tab.getPosition(), true);
+		if(mViewPager!=null){
+			mViewPager.setCurrentItem(tab.getPosition(), true);
+		}
 	}
 
 	@Override
