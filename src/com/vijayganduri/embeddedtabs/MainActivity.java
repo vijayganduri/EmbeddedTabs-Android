@@ -17,7 +17,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 
 	DemoCollectionPagerAdapter mDemoCollectionPagerAdapter;
 	ViewPagerParallax mViewPager;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,9 +33,8 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		createNewTab(actionBar, R.drawable.collections_sort_by_size);
 
 		mDemoCollectionPagerAdapter = new DemoCollectionPagerAdapter(getSupportFragmentManager());
-		mViewPager = (ViewPagerParallax) findViewById(R.id.pager);
-		//mViewPager.setOverlapPercentage(0.25f);
-		//mViewPager.addOnPageChangeListener(this);
+		mViewPager = (ViewPagerParallax) findViewById(R.id.pager);		
+		mViewPager.setOnPageChangeListener(this);
 		mViewPager.set_max_pages(2);
 		mViewPager.setBackgroundAsset(R.drawable.green_blue_blur);
 		mViewPager.setAdapter(mDemoCollectionPagerAdapter);
