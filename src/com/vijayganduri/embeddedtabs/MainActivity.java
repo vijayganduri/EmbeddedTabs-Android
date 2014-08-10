@@ -11,6 +11,8 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.ActionBar.TabListener;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.matthieu.ViewPagerParallax;
 import com.vijayganduri.embeddedtabs.utils.ActionBarUtils;
 
@@ -38,7 +40,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		mViewPager = (ViewPagerParallax) findViewById(R.id.pager);		
 		mViewPager.setOnPageChangeListener(this);
 		mViewPager.set_max_pages(2);
-		mViewPager.setBackgroundAsset(R.drawable.green_blue_blur);
+		mViewPager.setBackgroundAsset(R.drawable.app_bg_blur);
 		mViewPager.setAdapter(mDemoCollectionPagerAdapter);
 		mViewPager.setCurrentItem(0);
 	}
@@ -49,7 +51,27 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		tab.setTabListener(this);
 		actionBar.addTab(tab);
 	}
-
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getSupportMenuInflater().inflate(R.menu.main, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+        boolean history = mViewPager.getCurrentItem()==1;
+        menu.findItem(R.id.action_search).setVisible(history);
+		return super.onPrepareOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if(item.getItemId() == R.id.action_search){
+			//Handle search event here
+		}
+		return super.onOptionsItemSelected(item);
+	}
 
 	public class DemoCollectionPagerAdapter extends FragmentStatePagerAdapter {
 		public DemoCollectionPagerAdapter(FragmentManager fm) {
@@ -106,6 +128,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	@Override
 	public void onPageSelected(int position) {
 		getSupportActionBar().setSelectedNavigationItem(position);
+		supportInvalidateOptionsMenu();
 	}
 	
 }
