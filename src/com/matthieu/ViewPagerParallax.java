@@ -101,10 +101,10 @@ public class ViewPagerParallax extends ViewPager {
             int bitmap_size = imageHeight * imageWidth * 4 / 1024;
             if (loggable) Log.v(TAG, "freeMemory = " + freeMemory);
             if (loggable) Log.v(TAG, "calculated bitmap size = " + bitmap_size);
-            if (bitmap_size > freeMemory / 5) {
+            if (bitmap_size > freeMemory / 4) {
                 insufficientMemory = true;
                 Log.w(TAG, "outofmemory");
-                return; // we aren't going to use more than one fifth of free memory
+                return; // we aren't going to use more than one fourth of free memory
             }
 
             zoom_level = ((float) imageHeight) / getHeight();  // we are always in 'fitY' mode
