@@ -12,6 +12,7 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.ActionBar.TabListener;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.matthieu.ViewPagerParallax;
+import com.vijayganduri.embeddedtabs.utils.ActionBarUtils;
 
 public class MainActivity extends SherlockFragmentActivity implements TabListener, OnPageChangeListener{
 
@@ -25,12 +26,13 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 
 		ActionBar actionBar = getSupportActionBar();
 
+		//This code forces the actionbar tabs into the actionbar, as it is observed in landscape or tablet mode 
 		ActionBarUtils.setHasEmbeddedTabs(actionBar, true);
 
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		
-		createNewTab(actionBar, R.drawable.device_access_mic);
-		createNewTab(actionBar, R.drawable.collections_sort_by_size);
+		createNewTab(actionBar, R.drawable.tab_icon_mic_selector);
+		createNewTab(actionBar, R.drawable.tab_icon_history_selector);
 
 		mDemoCollectionPagerAdapter = new DemoCollectionPagerAdapter(getSupportFragmentManager());
 		mViewPager = (ViewPagerParallax) findViewById(R.id.pager);		
@@ -66,7 +68,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			return "PAGE " + (position + 1);
+			return String.format("PAGE %d", (position + 1));
 		}
 	}
 

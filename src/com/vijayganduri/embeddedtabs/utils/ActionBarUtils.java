@@ -1,4 +1,4 @@
-package com.vijayganduri.embeddedtabs;
+package com.vijayganduri.embeddedtabs.utils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -12,13 +12,11 @@ public class ActionBarUtils {
 
 		//This never works, as we are using actionbarsherlock
 		// if it is a Jelly Bean implementation (ActionBarImplJB), get the super class (ActionBarImplICS)
-		if ("android.support.v7.app.ActionBarImplJB".equals(actionBarClass.getName()))
-		{
+		if ("android.support.v7.app.ActionBarImplJB".equals(actionBarClass.getName())){
 			actionBarClass = actionBarClass.getSuperclass();
 		}
 
-		try
-		{
+		try{
 			// try to get the mActionBar field, because the current ActionBar is probably just a wrapper Class
 			// if this fails, no worries, this will be an instance of the native ActionBar class or from the ActionBarImplBase class
 			final Field actionBarField = actionBarClass.getDeclaredField("mActionBar");
@@ -30,8 +28,7 @@ public class ActionBarUtils {
 		catch (IllegalArgumentException e) {}
 		catch (NoSuchFieldException e) {}
 
-		try
-		{
+		try{
 			// now call the method setHasEmbeddedTabs, this will put the tabs inside the ActionBar
 			final Method method = actionBarClass.getDeclaredMethod("setHasEmbeddedTabs", new Class[] { Boolean.TYPE });
 			method.setAccessible(true);

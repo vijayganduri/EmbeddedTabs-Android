@@ -6,14 +6,22 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <item name="android:actionBarStyle">@style/MyActionBarStyle</item>        
     	<item name="android:actionBarTabBarStyle">@style/MyTabBarStyle</item>
+        <item name="actionBarTabStyle">@style/ActionBarTabStyle.Ebtabsdemo</item>
+        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Ebtabsdemo</item>
     </style>
 
     <style name="MyActionBarStyle" parent="@style/Widget.Sherlock.Light.ActionBar.Solid">
         <item name="android:displayOptions"></item>
+       <item name="background">@color/ab_bg_color</item>
+       <item name="android:background">@color/ab_bg_color</item>
     </style>
 
     <style name="MyTabBarStyle" parent="@style/Widget.Sherlock.Light.ActionBar.TabBar">
         <item name="android:showDividers">none</item>
     </style>
 
+    
+    <style name="ActionBarTabStyle.Ebtabsdemo" parent="@style/Widget.Sherlock.Light.ActionBar.TabView">
+        <item name="android:background">@drawable/tab_indicator_ab_ebtabsdemo</item>
+    </style>
 </resources>
